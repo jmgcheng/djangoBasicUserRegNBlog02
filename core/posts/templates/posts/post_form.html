@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>{% if form.instance.pk %}Edit Post{% else %}Create Post{% endif %}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <hr>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a href="{% url 'post-list' %}" class="btn btn-secondary">Back to Posts</a>
+</form>
+{% endblock %}

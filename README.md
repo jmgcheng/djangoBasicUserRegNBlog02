@@ -1,11 +1,21 @@
 # just clone
-```
-git clone https://github.com/jmgcheng/djangoBasicUserRegNBlog02.git
-```
 
-
+```
+> git clone https://github.com/jmgcheng/djangoBasicUserRegNBlog02.git
+> cd djangoBasicUserRegNBlog02
+> python -m venv env
+> env\Scripts\activate
+> cd core
+> code .
+> pip install -r requirements.txt
+> python manage.py makemigrations
+> python manage.py migrate
+> python manage.py createsuperuser
+> python manage.py runserver
+```
 
 # installations
+
 ```
 > python -m venv env
 > env\Scripts\activate
@@ -18,14 +28,16 @@ git clone https://github.com/jmgcheng/djangoBasicUserRegNBlog02.git
 > python manage.py startapp posts
 > pip install crispy-bootstrap5
 > pip install django-crispy-forms
+> pip freeze > requirements.txt
+> pip install -r requirements.txt
 > python manage.py makemigrations
 > python manage.py migrate
+> python manage.py createsuperuser
 > python manage.py runserver
 ```
 
-
-
 # settings
+
 ```
 import os
 INSTALLED_APPS = [
@@ -59,9 +71,8 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 ```
 
-
-
 # template structure
+
 ```
 core/core/templates/base.html
 core/pages/templates/pages/about.html
@@ -80,9 +91,8 @@ core/posts/templates/posts/post_form.html
 core/posts/templates/posts/post_list.html
 ```
 
-
-
 # core/urls.py
+
 ```
 from django.contrib import admin
 from django.urls import path, include
@@ -104,9 +114,8 @@ urlpatterns = [
 ]
 ```
 
-
-
 # pages/urls.py
+
 ```
 from django.urls import path
 from pages.views import index, about
@@ -116,19 +125,17 @@ urlpatterns = [
 ]
 ```
 
-
-
 # accounts/urls.py
+
 ```
 # none
 ```
 
-
-
 # posts/urls.py
+
 ```
 from django.urls import path
-from posts.views import post_list, post_create, post_update, post_delete
+from posts.views import post_list, post_create, post_update, post_detail, post_delete
 urlpatterns = [
     path("", post_list, name="post-list"),
     path("<int:pk>/", post_detail, name="post-detail"),
@@ -138,23 +145,20 @@ urlpatterns = [
 ]
 ```
 
-
-
 # pages/models.py
+
 ```
 # none
 ```
-
-
 
 # accounts/models.py
+
 ```
 # none
 ```
 
-
-
 # posts/models.py
+
 ```
 from django.db import models
 from django.contrib.auth.models import User
@@ -169,9 +173,8 @@ class Post(models.Model):
         return self.title
 ```
 
-
-
 # accounts/forms.py
+
 ```
 from django import forms
 from django.contrib.auth.models import User
@@ -187,9 +190,8 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ["username", "email", "first_name", "last_name"]
 ```
 
-
-
 # posts/forms.py
+
 ```
 from django import forms
 from posts.models import Post
@@ -199,11 +201,10 @@ class PostForm(forms.ModelForm):
         fields = ["title", "content"]
 ```
 
-
-
 # core/templates/base.html
+
 ```
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -240,7 +241,7 @@ class PostForm(forms.ModelForm):
                     </button>
                     </form>
                 </li>
-                </ul>  
+                </ul>
             </div>
             {% else %}
             <div class="text-end">
@@ -257,15 +258,14 @@ class PostForm(forms.ModelForm):
         {% endblock %}
         </div>
     </div>
-    </div>  
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
 ```
 
-
-
 # pages/templates/pages/about.html
+
 ```
 {% extends "base.html" %}
 {% block content %}
@@ -273,9 +273,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/login.html
+
 ```
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
@@ -291,9 +290,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/password_reset_complete.html
+
 ```
 {% extends "base.html" %}
 {% block content %}
@@ -301,9 +299,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/password_reset_confirm.html
+
 ```
 {% extends "base.html" %}
 {% block content %}
@@ -316,9 +313,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/password_reset_done.html
+
 ```
 {% extends "base.html" %}
 {% block content %}
@@ -326,9 +322,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/password_reset_form.html
+
 ```
 {% extends "base.html" %}
 {% block content %}
@@ -341,9 +336,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/profile.html
+
 ```
 {% extends "base.html" %}
 {% block content %}
@@ -354,9 +348,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/profile_update.html
+
 ```
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
@@ -371,9 +364,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # accounts/templates/accounts/register.html
+
 ```
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
@@ -388,9 +380,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # posts/templates/posts/post_detail.html
+
 ```
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
@@ -409,9 +400,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # posts/templates/posts/post_form.html
+
 ```
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
@@ -427,9 +417,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # posts/templates/posts/post_list.html
+
 ```
 {% extends "base.html" %}
 {% block content %}
@@ -445,9 +434,8 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-
-
 # pages/views.py
+
 ```
 from django.http import HttpResponse
 from django.shortcuts import HttpResponseRedirect, reverse, render
@@ -458,9 +446,8 @@ def about(request):
     return render(request, "pages/about.html")
 ```
 
-
-
 # accounts/views.py
+
 ```
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -493,9 +480,8 @@ def profile_update(request):
     return render(request, "accounts/profile_update.html", {"form": form})
 ```
 
-
-
 # posts/views.py
+
 ```
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
