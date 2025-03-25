@@ -571,7 +571,6 @@ sudo systemctl enable postgresql  # Ensures it starts on boot
 ### a.) setup
 
 ```
-postgres
 psql -U postgres
 mypassword
 CREATE DATABASE myblogdb;
