@@ -14,7 +14,11 @@
 > python manage.py runserver
 ```
 
-# installations
+---
+
+# manual
+
+## installations
 
 ```
 > python -m venv env
@@ -36,7 +40,7 @@
 > python manage.py runserver
 ```
 
-# settings
+## settings
 
 ```
 import os
@@ -71,7 +75,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 ```
 
-# template structure
+## template structure
 
 ```
 core/core/templates/base.html
@@ -91,7 +95,7 @@ core/posts/templates/posts/post_form.html
 core/posts/templates/posts/post_list.html
 ```
 
-# core/urls.py
+## core/urls.py
 
 ```
 from django.contrib import admin
@@ -114,7 +118,7 @@ urlpatterns = [
 ]
 ```
 
-# pages/urls.py
+## pages/urls.py
 
 ```
 from django.urls import path
@@ -125,13 +129,13 @@ urlpatterns = [
 ]
 ```
 
-# accounts/urls.py
+## accounts/urls.py
 
 ```
 # none
 ```
 
-# posts/urls.py
+## posts/urls.py
 
 ```
 from django.urls import path
@@ -145,19 +149,19 @@ urlpatterns = [
 ]
 ```
 
-# pages/models.py
+## pages/models.py
 
 ```
 # none
 ```
 
-# accounts/models.py
+## accounts/models.py
 
 ```
 # none
 ```
 
-# posts/models.py
+## posts/models.py
 
 ```
 from django.db import models
@@ -173,7 +177,7 @@ class Post(models.Model):
         return self.title
 ```
 
-# accounts/forms.py
+## accounts/forms.py
 
 ```
 from django import forms
@@ -190,7 +194,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ["username", "email", "first_name", "last_name"]
 ```
 
-# posts/forms.py
+## posts/forms.py
 
 ```
 from django import forms
@@ -201,7 +205,7 @@ class PostForm(forms.ModelForm):
         fields = ["title", "content"]
 ```
 
-# core/templates/base.html
+## core/templates/base.html
 
 ```
 {% load static %}
@@ -264,7 +268,7 @@ class PostForm(forms.ModelForm):
 </html>
 ```
 
-# pages/templates/pages/about.html
+## pages/templates/pages/about.html
 
 ```
 {% extends "base.html" %}
@@ -273,7 +277,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/login.html
+## accounts/templates/accounts/login.html
 
 ```
 {% extends "base.html" %}
@@ -290,7 +294,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/password_reset_complete.html
+## accounts/templates/accounts/password_reset_complete.html
 
 ```
 {% extends "base.html" %}
@@ -299,7 +303,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/password_reset_confirm.html
+## accounts/templates/accounts/password_reset_confirm.html
 
 ```
 {% extends "base.html" %}
@@ -313,7 +317,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/password_reset_done.html
+## accounts/templates/accounts/password_reset_done.html
 
 ```
 {% extends "base.html" %}
@@ -322,7 +326,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/password_reset_form.html
+## accounts/templates/accounts/password_reset_form.html
 
 ```
 {% extends "base.html" %}
@@ -336,7 +340,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/profile.html
+## accounts/templates/accounts/profile.html
 
 ```
 {% extends "base.html" %}
@@ -348,7 +352,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/profile_update.html
+## accounts/templates/accounts/profile_update.html
 
 ```
 {% extends "base.html" %}
@@ -364,7 +368,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# accounts/templates/accounts/register.html
+## accounts/templates/accounts/register.html
 
 ```
 {% extends "base.html" %}
@@ -380,7 +384,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# posts/templates/posts/post_detail.html
+## posts/templates/posts/post_detail.html
 
 ```
 {% extends "base.html" %}
@@ -400,7 +404,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# posts/templates/posts/post_form.html
+## posts/templates/posts/post_form.html
 
 ```
 {% extends "base.html" %}
@@ -417,7 +421,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# posts/templates/posts/post_list.html
+## posts/templates/posts/post_list.html
 
 ```
 {% extends "base.html" %}
@@ -434,7 +438,7 @@ class PostForm(forms.ModelForm):
 {% endblock %}
 ```
 
-# pages/views.py
+## pages/views.py
 
 ```
 from django.http import HttpResponse
@@ -446,7 +450,7 @@ def about(request):
     return render(request, "pages/about.html")
 ```
 
-# accounts/views.py
+## accounts/views.py
 
 ```
 from django.shortcuts import render, redirect
@@ -480,7 +484,7 @@ def profile_update(request):
     return render(request, "accounts/profile_update.html", {"form": form})
 ```
 
-# posts/views.py
+## posts/views.py
 
 ```
 from django.shortcuts import render, get_object_or_404, redirect
@@ -531,4 +535,89 @@ def post_delete(request, pk):
     post.delete()
     messages.success(request, "Post deleted successfully!")
     return redirect("post-list")
+```
+
+---
+
+# Migrate to Postgresql
+
+## Step 1: Install PostgreSQL
+
+### For Ubuntu
+
+```
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+```
+
+### For Windows
+
+1. Download PostgreSQL from https://www.postgresql.org/download/.
+2. Run the installer and remember the username (postgres) and password you set.
+
+## Step 2: Start PostgreSQL Service
+
+### On Ubuntu/Debian/macOS (if not running automatically):
+
+```
+sudo systemctl start postgresql
+sudo systemctl enable postgresql  # Ensures it starts on boot
+```
+
+### On Windows, use the PostgreSQL service manager (pgAdmin or pg_ctl)
+
+## Step 3: Create a PostgreSQL Database & User
+
+### a.) setup
+
+```
+postgres
+psql -U postgres
+mypassword
+CREATE DATABASE myblogdb;
+CREATE USER mybloguser WITH PASSWORD 'mypassword';
+GRANT ALL PRIVILEGES ON DATABASE myblogdb TO mybloguser;
+ALTER DATABASE myblogdb owner to mybloguser;
+\q
+```
+
+### b.) setup
+
+```
+sudo -u postgres psql
+CREATE DATABASE myblogdb;
+CREATE USER mybloguser WITH PASSWORD 'mypassword';
+ALTER ROLE mybloguser SET client_encoding TO 'utf8';
+ALTER ROLE mybloguser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE mybloguser SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE myblogdb TO mybloguser;
+\q
+```
+
+## Step 4: Install PostgreSQL Adapter for Python
+
+```
+pip install psycopg2-binary
+```
+
+## Step 5: Update settings.py
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'myblogdb',
+        'USER': 'mybloguser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+```
+
+## Step 6: Apply Migrations
+
+```
+python manage.py migrate
+python manage.py createsuperuser # if needed
 ```
