@@ -3,12 +3,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from posts.models import Post
 from posts.forms import PostForm
+
+
 def post_list(request):
     posts = Post.objects.all().order_by("-created_at")
     return render(request, "posts/post_list.html", {"posts": posts})
+
+
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, "posts/post_detail.html", {"post": post})
+
+
 @login_required
 def post_create(request):
     if request.method == "POST":
@@ -22,6 +28,8 @@ def post_create(request):
     else:
         form = PostForm()
     return render(request, "posts/post_form.html", {"form": form})
+
+
 @login_required
 def post_update(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -37,6 +45,8 @@ def post_update(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, "posts/post_form.html", {"form": form})
+
+
 @login_required
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)

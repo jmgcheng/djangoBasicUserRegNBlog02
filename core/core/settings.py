@@ -131,7 +131,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'post-list'
 LOGOUT_REDIRECT_URL = 'post-list'
 LOGIN_URL = 'login'
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # For testing email sending
+# For testing email sending
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
